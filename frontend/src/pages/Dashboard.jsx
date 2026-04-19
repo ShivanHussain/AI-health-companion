@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   const fetchHealthRecords = async () => {
     try {
-      const response = await axios.get('/api/health');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/health`);
       setHealthRecords(response.data);
       setLoading(false);
     } catch (err) {
@@ -50,7 +50,7 @@ const Dashboard = () => {
     setSuccess('');
 
     try {
-      await axios.post('/api/health', formData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/health`, formData);
       setSuccess('Health record added successfully!');
       setShowAddForm(false);
       setFormData({
@@ -78,7 +78,7 @@ const Dashboard = () => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`/api/health/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/health/${id}`);
 
         Swal.fire({
           title: "Deleted!",
