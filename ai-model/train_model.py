@@ -15,11 +15,10 @@ from transformers import (
 from sklearn.preprocessing import LabelEncoder
 from datasets import Dataset
 
-print("🚀 Training BERT Model (FIXED VERSION)...")
+print("Training BERT Model")
 
-# -------------------------
+
 # LOAD DATA
-# -------------------------
 df = pd.read_csv("data/dataset.csv")
 df.columns = df.columns.str.strip().str.lower()
 
@@ -29,17 +28,14 @@ df["risk"] = df["risk"].str.lower().str.strip()
 if "description" in df.columns:
     df = df.rename(columns={"description": "text"})
 
-# -------------------------
 # VALIDATE DATA
-# -------------------------
 df = df.dropna(subset=["text", "risk"])
 
 print("Label distribution:")
 print(df["risk"].value_counts())
 
-# -------------------------
-# FIXED LABEL ENCODING
-# -------------------------
+
+# LABEL ENCODING
 RISK_ORDER = ["low", "medium", "high"]
 
 le = LabelEncoder()
@@ -47,9 +43,8 @@ le.fit(RISK_ORDER)
 
 df["label"] = le.transform(df["risk"])
 
-# -------------------------
-# SHUFFLE DATA (IMPORTANT)
-# -------------------------
+
+# SHUFFLE DATA
 df = df.sample(frac=1, random_state=42).reset_index(drop=True)
 
 # keep only required columns
@@ -57,9 +52,8 @@ df = df[["text", "label"]]
 
 dataset = Dataset.from_pandas(df)
 
-# -------------------------
+
 # TOKENIZER
-# -------------------------
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
 def tokenize(batch):
@@ -77,9 +71,8 @@ dataset = dataset.remove_columns(["text"])
 
 dataset = dataset.train_test_split(test_size=0.2)
 
-# -------------------------
+
 # MODEL
-# -------------------------
 model = BertForSequenceClassification.from_pretrained(
     "bert-base-uncased",
     num_labels=len(RISK_ORDER)
@@ -111,18 +104,17 @@ trainer = Trainer(
     eval_dataset=dataset["test"]
 )
 
-# -------------------------
+
+
 # TRAIN
-# -------------------------
 trainer.train()
 
-# -------------------------
+
 # SAVE MODEL
-# -------------------------
 os.makedirs("model", exist_ok=True)
 
 model.save_pretrained("model/bert-model")
 tokenizer.save_pretrained("model/tokenizer")
 joblib.dump(le, "model/label_encoder.pkl")
 
-print("🔥 Training Completed Successfully!")
+print("Training Completed Successfully!")
