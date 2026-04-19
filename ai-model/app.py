@@ -6,6 +6,7 @@ import torch
 import joblib
 from transformers import BertTokenizer, BertForSequenceClassification
 import uvicorn
+import os
 
 from utils.recommendation import generate_recommendations
 
@@ -61,4 +62,5 @@ def predict(data: HealthInput):
 
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=5001, reload=True)
+    port = int(os.environ.get("PORT", 5001))
+    uvicorn.run("app:app", host="0.0.0.0", port=port)
