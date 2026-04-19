@@ -84,7 +84,7 @@ const createHealthRecord = async (req, res) => {
 
     // CALL AI MODEL 
     const aiRes = await axios.post(
-      "http://localhost:5001/predict",
+      process.env.AI_MODEL_URI,
       {
         type,
         description

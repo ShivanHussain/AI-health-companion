@@ -149,7 +149,7 @@ python train_model.py
 uvicorn ai_api:app --reload --port 5001
 ```
 
-👉 Test API:
+ Test API:
 http://localhost:5001/docs
 
 ---

@@ -7,6 +7,7 @@ backend/node_modules/
 .env.*
 backend/.env
 ai-model/.env
+frontend/.env
 
 # Python
 __pycache__/
