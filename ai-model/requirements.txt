@@ -1,0 +1,10 @@
+torch
+transformers
+scikit-learn
+pandas
+fastapi
+uvicorn
+joblib
+uvicorn
+accelerate>=1.1.0
+transformers[torch]

@@ -1,0 +1,65 @@
+
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# ======================
+# ENV FILES
+# ======================
+.env
+.env.*
+backend/.env
+ai-model/.env
+
+# ======================
+# PYTHON (AI MODEL)
+# ======================
+__pycache__/
+*.pyc
+*.pyo
+
+ai-model/__pycache__/
+ai-model/utils/__pycache__/
+
+# Virtual env
+ai-model/env/
+env/
+venv/
+
+# ======================
+# AI MODEL FILES (BIG)
+# ======================
+ai-model/model/checkpoint-*/
+ai-model/model/*.bin
+ai-model/model/*.pt
+ai-model/model/bert-model/
+
+# ======================
+# LOGS
+# ======================
+*.log
+
+# ======================
+# BUILD FILES
+# ======================
+frontend/dist/
+frontend/build/
+backend/dist/
+
+# ======================
+# SYSTEM FILES
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# EDITOR
+# ======================
+.vscode/
+.idea/
+
+# ======================
+# TEMP
+# ======================
+.bolt/
+*.swp

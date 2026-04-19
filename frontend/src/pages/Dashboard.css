@@ -1,0 +1,278 @@
+/* 🌞 Light Mode */
+.dashboard-page {
+  padding: 40px 0;
+  min-height: calc(100vh - 64px);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.dashboard-header p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.add-record-form {
+  margin-bottom: 40px;
+}
+
+.add-record-form h2 {
+  color: #2c3e50;
+  margin-bottom: 24px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.health-records h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 24px;
+}
+
+.no-records {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+  color: #7f8c8d;
+}
+
+.no-records p {
+  font-size: 1.2rem;
+}
+
+.records-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.record-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.record-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.record-type {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Type colors */
+.type-checkup { background-color: #e3f2fd; color: #1976d2; }
+.type-symptom { background-color: #fff3e0; color: #f57c00; }
+.type-medication { background-color: #f3e5f5; color: #7b1fa2; }
+.type-exercise { background-color: #e8f5e9; color: #388e3c; }
+.type-diet { background-color: #fff9c4; color: #f57f17; }
+.type-other { background-color: #f5f5f5; color: #616161; }
+
+.risk-badge {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+}
+
+.record-card h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 12px;
+}
+
+.record-description {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.record-date {
+  color: #95a5a6;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.metrics-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  font-weight: 600;
+}
+
+.metric-value {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.ai-insights {
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.ai-insights h4 {
+  color: #667eea;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.ai-insights ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ai-insights li {
+  padding: 8px 0;
+  color: #555;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 24px;
+}
+
+.ai-insights li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+}
+
+.btn-small {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-header h1 {
+    font-size: 2rem;
+  }
+
+  .records-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 🌙 DARK MODE OVERRIDES */
+.dark-mode .dashboard-page {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .dashboard-header h1,
+.dark-mode .add-record-form h2,
+.dark-mode .health-records h2,
+.dark-mode .record-card h3,
+.dark-mode .metric-value {
+  color: #f5f5f5;
+}
+
+.dark-mode .dashboard-header p,
+.dark-mode .record-description,
+.dark-mode .record-date,
+.dark-mode .metric-label,
+.dark-mode .ai-insights li {
+  color: #ccc;
+}
+
+.dark-mode .record-card {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .metrics-display {
+  background-color: #1b1b1b;
+}
+
+.dark-mode .ai-insights {
+  background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+}
+
+.dark-mode .type-checkup { background-color: #1976d222; color: #1976d2; }
+.dark-mode .type-symptom { background-color: #f57c0022; color: #f57c00; }
+.dark-mode .type-medication { background-color: #7b1fa222; color: #7b1fa2; }
+.dark-mode .type-exercise { background-color: #388e3c22; color: #388e3c; }
+.dark-mode .type-diet { background-color: #f57f1722; color: #f57f17; }
+.dark-mode .type-other { background-color: #61616122; color: #ccc; }
+
+/* Smooth transitions */
+.dashboard-page, .record-card, .metrics-display, .ai-insights {
+  transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.3s ease;
+}
+
+
+.scroll-list {
+  max-height: 120px;
+  overflow-y: auto;
+
+  /* Chrome, Safari */
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE & Edge */
+}
+
+.scroll-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}

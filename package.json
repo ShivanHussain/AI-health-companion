@@ -1,0 +1,10 @@
+
+
+{
+  "scripts": {
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && npm run dev",
+    "ml": "cd ai-model && ./env/bin/python app.py",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\" \"npm run ml\""
+  }
+}
