@@ -68,51 +68,6 @@ const deleteHealthRecord = async (req, res) => {
 
 
 
-// const createHealthRecord = async (req, res) => {
-//   try {
-//     const { type, title, description, metrics } = req.body;
-
-
-//     if (!type || !title || !description) {
-//       return res.status(400).json({ message: 'Please provide all required fields' });
-//     }
-
-//     // Call AI Model (FastAPI)
-//     const aiRes = await axios.post("http://localhost:5001/predict", {
-//       type: type,
-//       bloodPressure: metrics?.bloodPressure,
-//       heartRate: metrics?.heartRate,
-//       temperature: metrics?.temperature,
-//       weight: metrics?.weight
-//     });
-
-//     const aiData = aiRes.data;
-
-//     // Save in DB
-//     const healthRecord = await HealthRecord.create({
-//       user: req.user._id,
-//       type,
-//       title,
-//       description,
-//       date: Date.now(),
-//       metrics,
-//       aiAnalysis: {
-//         recommendations: aiData.recommendations,
-//         riskLevel: aiData.riskLevel,
-//         healthScore: aiData.healthScore
-//       },
-//     });
-
-//     // Send response to frontend
-//     res.status(201).json(healthRecord);
-
-//   } catch (error) {
-//     console.error("AI ERROR:", error.message);
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
-
 const createHealthRecord = async (req, res) => {
   try {
     const { type, description } = req.body;
