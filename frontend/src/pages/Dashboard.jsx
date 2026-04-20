@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import './Dashboard.css';
 import Swal from "sweetalert2";
+import ChatBot from './ChatBot';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -15,6 +16,9 @@ const Dashboard = () => {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  const [selectedRecord, setSelectedRecord] = useState(null);
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     fetchHealthRecords();
@@ -42,6 +46,11 @@ const Dashboard = () => {
     } else {
       setFormData({ ...formData, [name]: value });
     }
+  };
+
+  const handleOpenChat = (record) => {
+    setSelectedRecord(record);
+    setShowChat(true);
   };
 
   const handleSubmit = async (e) => {
@@ -230,18 +239,34 @@ const Dashboard = () => {
                     </div>
                   )}
 
-                  <button
-                    className="btn btn-danger btn-small"
-                    onClick={() => handleDelete(record._id)}
-                  >
-                    Delete
-                  </button>
+                  <div className="btn-group">
+                    <button
+                      className="btn btn-danger btn-small"
+                      onClick={() => handleDelete(record._id)}
+                    >
+                      Delete
+                    </button>
+
+                    <button
+                      className="btn btn-primary btn-small"
+                      onClick={() => handleOpenChat(record)}
+                    >
+                      Chat with AI
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
           )}
         </div>
       </div>
+      {showChat && (
+        <ChatBot
+          record={selectedRecord}
+          onClose={() => setShowChat(false)}
+        />
+      )}
+
     </div>
   );
 };

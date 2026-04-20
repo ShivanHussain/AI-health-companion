@@ -94,31 +94,83 @@ const getUserProfile = async (req, res) => {
   }
 };
 
+
+
+
 const updateUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id);
+    
+    const user = await User.findById(req.user._id).select("+password");
 
-    if (user) {
-      user.name = req.body.name || user.name;
-      user.age = req.body.age || user.age;
-      user.gender = req.body.gender || user.gender;
-      user.healthProfile = req.body.healthProfile || user.healthProfile;
-
-      const updatedUser = await user.save();
-
-      res.json({
-        _id: updatedUser._id,
-        name: updatedUser.name,
-        email: updatedUser.email,
-        age: updatedUser.age,
-        gender: updatedUser.gender,
-        healthProfile: updatedUser.healthProfile,
-      });
-    } else {
-      res.status(404).json({ message: 'User not found' });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
+
+    
+    if (req.body.name !== undefined) user.name = req.body.name;
+    if (req.body.email !== undefined) user.email = req.body.email;
+    if (req.body.age !== undefined) user.age = req.body.age;
+    if (req.body.gender !== undefined) user.gender = req.body.gender;
+    if (req.body.healthProfile !== undefined) {
+      user.healthProfile = req.body.healthProfile;
+    }
+
+    
+    console.log("new password:", req.body.password);
+    console.log("current password:", req.body.currentPassword);
+
+ 
+    if (req.body.password || req.body.currentPassword) {
+
+      
+      if (!req.body.password || !req.body.currentPassword) {
+        return res.status(400).json({
+          message: "Both current password and new password are required",
+        });
+      }
+
+      
+      if (!user.password) {
+        return res.status(400).json({
+          message: "User password not found",
+        });
+      }
+
+      
+      const isMatch = await bcrypt.compare(
+        req.body.currentPassword,
+        user.password
+      );
+
+      if (!isMatch) {
+        return res.status(400).json({
+          message: "Current password is incorrect",
+        });
+      }
+
+      // hash new password
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(req.body.password, salt);
+    }
+
+    
+    const updatedUser = await user.save();
+
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      age: updatedUser.age,
+      gender: updatedUser.gender,
+      healthProfile: updatedUser.healthProfile,
+    });
+
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Update Error:", error);
+    res.status(500).json({
+      message: error.message || "Server error",
+    });
   }
 };
 

@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const healthRoutes = require('./routes/healthRoutes');
+const chatRoutes = require("./routes/chatRoutes");
 
 dotenv.config();
 connectDB();
@@ -12,9 +13,14 @@ const app = express();
 
 
 
+// app.use(cors({
+//   origin: "https://ai-health-com.netlify.app",
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true
+// }));
+
 app.use(cors({
-  origin: "https://ai-health-com.netlify.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: "http://localhost:3000",
   credentials: true
 }));
 app.use(express.json());
@@ -29,6 +35,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/health', healthRoutes);
+app.use("/api/ai", chatRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

@@ -28,7 +28,15 @@ const Navbar = () => {
           {user ? (
             <>
               <li><Link to="/dashboard">Dashboard</Link></li>
-              <li><span className="user-name">Hi, {user.name}</span></li>
+              <li>
+                <span
+                  className="user-name"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate('/profile')}
+                >
+                  Hi, {user.name}
+                </span>
+              </li>
               <li>
                 <button onClick={handleLogout} className="btn btn-logout">Logout</button>
               </li>

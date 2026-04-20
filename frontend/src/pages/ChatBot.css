@@ -1,0 +1,274 @@
+/* ─── Google Font ─────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+/* ─── Keyframes ───────────────────────────────────── */
+@keyframes cb-slide-up {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+@keyframes cb-msg-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+@keyframes cb-bounce {
+  0%, 60%, 100% { transform: translateY(0);   opacity: 0.45; }
+  30%            { transform: translateY(-5px); opacity: 1;    }
+}
+
+/* ─── Overlay ─────────────────────────────────────── */
+.cb-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 8, 18, 0.72);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* ─── Main Container ──────────────────────────────── */
+.cb-container {
+  font-family: 'DM Sans', sans-serif;
+  width: 390px;
+  height: 520px;
+  background: linear-gradient(150deg, #0e0e1c 0%, #181828 100%);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: cb-slide-up 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── Header ──────────────────────────────────────── */
+.cb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.cb-header-left {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.cb-avatar {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c6aff, #4facfe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.cb-online-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 10px;
+  height: 10px;
+  background: #22d35a;
+  border-radius: 50%;
+  border: 2px solid #0e0e1c;
+}
+
+.cb-agent-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e8e8f4;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+.cb-status {
+  font-size: 11px;
+  color: #22d35a;
+  margin: 2px 0 0;
+}
+
+.cb-close-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: #888;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  line-height: 1;
+}
+
+.cb-close-btn:hover {
+  background: rgba(255, 80, 80, 0.18);
+  color: #ff6b6b;
+}
+
+/* ─── Chat Box ────────────────────────────────────── */
+.cb-chat-box {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+}
+
+.cb-chat-box::-webkit-scrollbar        { width: 4px; }
+.cb-chat-box::-webkit-scrollbar-track  { background: transparent; }
+.cb-chat-box::-webkit-scrollbar-thumb  { background: rgba(255,255,255,0.08); border-radius: 4px; }
+
+/* ─── Message Wrap ────────────────────────────────── */
+.cb-msg-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 78%;
+  animation: cb-msg-in 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cb-msg-wrap--user { align-self: flex-end;  align-items: flex-end;  }
+.cb-msg-wrap--ai   { align-self: flex-start; align-items: flex-start; }
+
+/* ─── Bubbles ─────────────────────────────────────── */
+.cb-bubble {
+  padding: 10px 14px;
+  font-size: 13.5px;
+  line-height: 1.58;
+  word-break: break-word;
+}
+
+.cb-bubble--user {
+  background: linear-gradient(135deg, #7c6aff, #5a8fff);
+  color: #fff;
+  border-radius: 18px 18px 4px 18px;
+}
+
+.cb-bubble--ai {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #dce0f0;
+  border-radius: 18px 18px 18px 4px;
+}
+
+/* ─── Timestamp ───────────────────────────────────── */
+.cb-time {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.22);
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+/* ─── Typing Indicator ────────────────────────────── */
+.cb-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 11px 15px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px 18px 18px 4px;
+  width: fit-content;
+}
+
+.cb-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7c6aff;
+  display: inline-block;
+  animation: cb-bounce 1.2s infinite;
+}
+
+.cb-dot--2 { animation-delay: 0.2s; }
+.cb-dot--3 { animation-delay: 0.4s; }
+
+/* ─── Footer / Input ──────────────────────────────── */
+.cb-footer {
+  padding: 12px 14px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.cb-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: 6px 6px 6px 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cb-input-row:focus-within {
+  border-color: rgba(124, 106, 255, 0.55);
+  box-shadow: 0 0 0 3px rgba(124, 106, 255, 0.09);
+}
+
+.cb-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e8e8f4;
+  font-size: 13.5px;
+  font-family: 'DM Sans', sans-serif;
+  caret-color: #7c6aff;
+}
+
+.cb-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── Send Button ─────────────────────────────────── */
+.cb-send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c6aff, #5a8fff);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.15s, opacity 0.2s;
+}
+
+.cb-send-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.cb-send-btn:hover:not(:disabled) {
+  transform: scale(1.08);
+}
+
+.cb-send-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.cb-send-btn:disabled {
+  opacity: 0.38;
+  cursor: default;
+}
