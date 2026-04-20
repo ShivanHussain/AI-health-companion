@@ -13,16 +13,12 @@ const app = express();
 
 
 
-// app.use(cors({
-//   origin: "https://ai-health-com.netlify.app",
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   credentials: true
-// }));
-
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: "https://ai-health-com.netlify.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
